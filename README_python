@@ -1,0 +1,27 @@
+# DEPENDENCIES
+biopython (https://biopython.org/)
+pysam (https://pypi.org/project/pysam/)
+Picard (https://github.com/broadinstitute/picard/)
+bwa (http://bio-bwa.sourceforge.net/)
+SAMtools (http://www.htslib.org/)
+
+# SET THE BASH ENVIRONMENT
+(1) Add bwa and SAMtools to the global path
+export PATH=/path/to/bwa/:/path/to/samtools/:$PATH
+
+(2) Create a global variable pointing to Picard
+export PICARD=/path/to/picard/picard.jar
+
+# USAGE
+`generate_chromosome_mappability_mask.sh` should be run independently for each chromosome. Multiple chromosomes can be prepared in parallel for efficiency.
+
+generate_chromosome_mappability_mask.sh --ref REF_GENOME_PATH --k KMER_LENGTH --chr CHR
+
+    --ref  Path to directory containing the reference genome and all associated files for bwa
+           Path should include the base name for these files
+           e.g. if /local/workdir/REF_GENOME/hg38 contains files hg38.fa, hg38.fai, hg38.ann, etc.
+                REF_GENOME_PATH would be /local/workdir/REF_GENOME/hg38/hg38
+
+   --k    int, length of synthetic reads to generate in basepairs (e.g. 100bp)
+
+   --chr  Name of chromosome, as indicated in the reference genome file (e.g. 1 for hg37, chr1 for hg38, chrI for sacCer3) 
